@@ -1,0 +1,32 @@
+﻿GridBackground {
+    --grid-background-color: #282828;
+    --line-color: rgba(193, 196, 192, 0.1);
+    --thick-line-color: rgba(193, 196, 192, 0.1);
+    --spacing: 10;
+}
+
+#collapsible-area {
+    background-color: rgba(62,62,62, 205);
+}
+
+#extension {
+    flex-shrink: 0;
+    flex-grow: 1;
+    padding: 10px;
+    min-width: 400px;
+    border-color: #84E4E7;
+}
+
+.property-box {
+    background-color: #515151;
+    border-radius: 1px;
+    border-color: black;
+}
+
+.property-foldout {
+    padding-right: 10px;
+}
+
+.root {
+    min-width: 100px;
+}
