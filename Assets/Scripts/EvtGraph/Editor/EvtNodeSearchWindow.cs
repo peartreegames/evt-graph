@@ -48,7 +48,7 @@ namespace EvtGraph.Editor
             var localMousePosition = _view.contentViewContainer.WorldToLocal(worldMousePosition);
 
             node.position = localMousePosition;
-            
+            _evtTrigger.nodes ??= new List<EvtNodeData>();
             switch (node)
             {
                 case EvtConditionNode condition:

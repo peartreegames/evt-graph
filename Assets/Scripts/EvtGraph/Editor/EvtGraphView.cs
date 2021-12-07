@@ -113,6 +113,7 @@ namespace EvtGraph.Editor
             foreach (var nodeData in _evtTrigger.nodes)
             {
                 var node = CreateNode(nodeData);
+                if (node == null) continue;
                 AddElement(node);
                 node.SetPosition(new Rect(nodeData.position, EvtGraphView.DefaultNodeSize));
             }

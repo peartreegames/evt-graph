@@ -7,13 +7,13 @@ namespace EvtGraph
     {
         [SerializeField] private Transform from;
         [SerializeField] private Transform to;
-        [SerializeField] private EvtComparisonOperator comparisonOperator;
+        [SerializeField] private EvtComparisonOperator compOp;
         [SerializeField] private float distance;
         public override bool CheckIsSatisfied(EvtTrigger trigger)
         {
             var fromPosition = from.position;
             var toPosition = to.position;
-            return comparisonOperator switch
+            return compOp switch
             {
                 EvtComparisonOperator.Equal => Vector3.Distance(fromPosition, toPosition) - distance < Mathf.Epsilon,
                 EvtComparisonOperator.NotEqual => Vector3.Distance(fromPosition, toPosition) - distance > Mathf.Epsilon,
