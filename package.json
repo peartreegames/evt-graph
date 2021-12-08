@@ -10,7 +10,7 @@
     "licensesUrl": "https://github.com/peartreegames/evt-graph/licensing.html",
     "dependencies": {
       "com.unity.modules.uielements": "1.0.0",
-      "com.peartree.evtvariables": "1.0.0"
+      "com.peartree.evtvariables": "https://github.com/peartreegames/evt-variables.git"
    },
    "keywords": [
       "peartree",
