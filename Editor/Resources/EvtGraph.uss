@@ -30,3 +30,7 @@
 .root {
     min-width: 100px;
 }
+
+.toolbar {
+    justify-content: flex-end;
+}

@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEditor;
 using UnityEditor.SceneManagement;
+using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
 namespace PeartreeGames.EvtGraph.Editor
@@ -20,6 +21,7 @@ namespace PeartreeGames.EvtGraph.Editor
             Init();
             Selection.selectionChanged += Init;
             EditorApplication.playModeStateChanged += PlayModeChanged;
+            EditorApplication.hierarchyChanged += Init;
         }
 
         private void OnDisable()
@@ -27,6 +29,7 @@ namespace PeartreeGames.EvtGraph.Editor
             rootVisualElement.Clear();
             Selection.selectionChanged -= Init;
             EditorApplication.playModeStateChanged -= PlayModeChanged;
+            EditorApplication.hierarchyChanged -= Init;
         }
 
         private void PlayModeChanged(PlayModeStateChange mode)
@@ -34,29 +37,32 @@ namespace PeartreeGames.EvtGraph.Editor
             Init();
         }
 
-        private void Init()
+        private EvtTrigger _evtTrigger;
+        public bool isLocked;
+
+        public void Init()
         {
-            rootVisualElement.Clear();
+            
+            if (isLocked) return;
             var box = new Box {style = {alignItems = Align.Center}};
             box.StretchToParentSize();
+            var label = new Label() {style = {top = 50}};
+            EvtTrigger evtTrigger = null;
             if (Selection.activeGameObject == null ||
-                !Selection.activeGameObject.TryGetComponent<EvtTrigger>(out var evtTrigger))
-            {
+                !Selection.activeGameObject.TryGetComponent<EvtTrigger>(out evtTrigger)) label.text = "No EvtTrigger selected";
+            if (PrefabStageUtility.GetCurrentPrefabStage() != null) label.text = "Cannot edit prefab EvtGraph";
+            if (Selection.count > 1) label.text = "Cannot edit multiple EvtTriggers at once";
 
-                var label = new Label("No EvtTrigger selected") {style = {top = 50}};
+            if (_evtTrigger == evtTrigger) return;
+            _evtTrigger = evtTrigger;
+            
+            rootVisualElement.Clear();
+            if (label.text != string.Empty)
+            {
                 box.Add(label);
                 rootVisualElement.Add(box);
                 return;
             }
-
-            if (PrefabStageUtility.GetCurrentPrefabStage() != null)
-            {
-                var label = new Label("Cannot edit prefab EvtGraph") {style = {top = 50}};
-                box.Add(label);
-                rootVisualElement.Add(box);
-                return;
-            }
-
             var graph = new EvtGraphView(this, evtTrigger)
             {
                 name = "EvtGraph"

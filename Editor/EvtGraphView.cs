@@ -23,6 +23,7 @@ namespace PeartreeGames.EvtGraph.Editor
             styleSheets.Add(Resources.Load<StyleSheet>("EvtGraph"));
             _evtTrigger = evtTrigger;
 
+
             this.AddManipulator(new ContentDragger());
             this.AddManipulator(new SelectionDragger());
             this.AddManipulator(new RectangleSelector());
@@ -30,7 +31,7 @@ namespace PeartreeGames.EvtGraph.Editor
             graphViewChanged = OnGraphChanged;
             var grid = new GridBackground();
             Insert(0, grid);
-
+            AddToolbar(editorWindow);
             var searchWindow = ScriptableObject.CreateInstance<EvtNodeSearchWindow>();
             searchWindow.Init(editorWindow, this, evtTrigger);
             nodeCreationRequest = ctx =>
@@ -38,6 +39,23 @@ namespace PeartreeGames.EvtGraph.Editor
             LoadGraph();
 
         }
+
+        private void AddToolbar(EvtGraphEditor editor)
+        {
+            var tools = new Toolbar();
+            var lockButton = new ToolbarButton();
+            tools.AddToClassList("toolbar");
+            lockButton.clicked += () =>
+            {
+                editor.isLocked = !editor.isLocked;
+                lockButton.text = editor.isLocked ? "Locked" : "Unlocked";
+                if (!editor.isLocked) editor.Init();
+            };
+            lockButton.text = lockButton.text = editor.isLocked ? "Locked" : "Unlocked";
+            tools.Add(lockButton);
+            Add(tools);
+        }
+
 
         private GraphViewChange OnGraphChanged(GraphViewChange graphViewChange)
         {
