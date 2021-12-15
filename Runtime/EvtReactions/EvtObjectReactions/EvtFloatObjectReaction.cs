@@ -7,6 +7,7 @@ namespace PeartreeGames.EvtGraph
 {
     public class EvtFloatObjectReaction : EvtReaction
     {
+        public new static string DisplayName => "Variable/Float";
         [SerializeField] private EvtFloatObject variable;
         [SerializeField] private EvtArithmeticOperator arithOp;
         [SerializeField] private float value;

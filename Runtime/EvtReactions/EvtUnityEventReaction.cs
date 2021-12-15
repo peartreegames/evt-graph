@@ -6,6 +6,7 @@ namespace PeartreeGames.EvtGraph
 {
     public class EvtUnityEventReaction : EvtReaction
     {
+        public new static string DisplayName => "UnityEvent";
         [SerializeField] private UnityEvent unityEvent;
         public override IEnumerator React(EvtTrigger trigger)
         {

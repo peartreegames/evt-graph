@@ -5,6 +5,7 @@ namespace PeartreeGames.EvtGraph
 {
     public class EvtDebugReaction : EvtReaction
     {
+        public new static string DisplayName => "Debug/Log";
         [SerializeField] private string message;
         public override IEnumerator React(EvtTrigger trigger)
         {

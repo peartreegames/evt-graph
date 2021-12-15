@@ -6,6 +6,7 @@ namespace PeartreeGames.EvtGraph
 {
     public class EvtLoadSceneReaction : EvtReaction
     {
+        public new static string DisplayName => "Scene/Load";
         [SerializeField] private LoadSceneMode mode;
         [SerializeField] private string sceneName;
         public override IEnumerator React(EvtTrigger trigger)

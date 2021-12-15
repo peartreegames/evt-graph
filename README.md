@@ -1,5 +1,5 @@
 ## EvtGraph
-Code for the "Creating a Serialized Conditional Reaction Sequence Graph in Unity" [YouTube videos](https://www.youtube.com/watch?v=KJ_ba50nooQ)
+Code for "Creating a Serialized Conditional Reaction Sequence Graph in Unity" [YouTube videos](https://www.youtube.com/watch?v=KJ_ba50nooQ)
 
 Repository has been converted to a package module. The `video-end` branch contains the project at the time of the part 2 completion.
 
@@ -17,7 +17,8 @@ then the repo can be added
 ![Architecture](./Documentation/Architecture.png)
 
 ## Todos
- - [ ] Zoom Persistence
+ - [ ] Zoom Persistence (Seems to be more complicated than originally thought)
  - [X] Foldout Persistence
  - [X] Rest of EvtTriggers
  - [ ] Standard set of Condition/Reactions
+

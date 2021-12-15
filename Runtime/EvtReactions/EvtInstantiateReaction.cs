@@ -5,6 +5,7 @@ namespace PeartreeGames.EvtGraph
 {
     public class EvtInstantiateReaction : EvtReaction
     {
+        public new static string DisplayName => "GameObject/Instantiate";
         [SerializeField] private GameObject prefab;
         [SerializeField] private Transform spawn;
         [SerializeField] private Transform parent;

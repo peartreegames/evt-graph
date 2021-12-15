@@ -6,6 +6,7 @@ namespace PeartreeGames.EvtGraph
 {
     public class EvtFloatObjectCondition : EvtCondition
     {
+        public new static string DisplayName => "Variable/Float";
         [SerializeField] private EvtFloatObject variable;
         [SerializeField] private EvtComparisonOperator compOp;
         [SerializeField] private float target;

@@ -221,16 +221,16 @@ namespace PeartreeGames.EvtGraph.Editor
             var reactions = serialized.FindProperty("items");
             choices.RegisterValueChangedCallback(change =>
             {
-                if (ScriptableObject.CreateInstance(change.newValue) is not EvtReaction react) return;
+                if (CreateInstanceFromDropdown<EvtReactionNode, EvtReaction>(change.newValue) is not EvtReaction react) return;
                 react.name = change.newValue;
                 choices.SetValueWithoutNotify("Select Reaction");
                 reactions.arraySize++;
                 reactions.GetArrayElementAtIndex(reactions.arraySize - 1).objectReferenceValue = react;
                 serialized.ApplyModifiedProperties();
                 var box = CreatePropertyBox(node, serialized, reactions, reactions.arraySize - 1);
+                box.Q<Foldout>().value = true;
                 node.extensionContainer.Add(box);
                 node.RefreshExpandedState();
-                
             });
             
             CreatePropertyBoxes(node, serialized, reactions);
@@ -259,13 +259,14 @@ namespace PeartreeGames.EvtGraph.Editor
             var conditions = serialized.FindProperty("items");
             choices.RegisterValueChangedCallback(change =>
             {
-                if (ScriptableObject.CreateInstance(change.newValue) is not EvtCondition cond) return;
+                if (CreateInstanceFromDropdown<EvtConditionNode, EvtCondition>(change.newValue) is not EvtCondition cond) return;
                 cond.name = change.newValue;
                 choices.SetValueWithoutNotify("Select Condition");
                 conditions.arraySize++;
                 conditions.GetArrayElementAtIndex(conditions.arraySize - 1).objectReferenceValue = cond;
                 serialized.ApplyModifiedProperties();
                 var box = CreatePropertyBox(node, serialized, conditions, conditions.arraySize - 1);
+                box.Q<Foldout>().value = true;
                 node.extensionContainer.Add(box);
                 node.RefreshExpandedState();
             });
@@ -292,7 +293,7 @@ namespace PeartreeGames.EvtGraph.Editor
             box.AddToClassList("property-box");
             var foldOut = new Foldout()
             {
-                text = obj.GetType().Name
+                text = obj.GetType().GetProperty("DisplayName")?.GetValue(null).ToString() ?? obj.GetType().Name
             };
             foldOut.contentContainer.AddToClassList("property-foldout");
             var serializedProp = new SerializedObject(obj);
@@ -319,13 +320,22 @@ namespace PeartreeGames.EvtGraph.Editor
             return box;
         }
 
-        private DropdownField CreateDropDown<T, TU>() where T : EvtNodeData where TU : EvtNodeItemData =>
+        private static DropdownField CreateDropDown<T, TU>() where T : EvtNodeData where TU : EvtNodeItemData =>
             new()
             {
                 choices = typeof(T).Assembly.GetTypes().Where(t => !t.IsAbstract && t.IsSubclassOf(typeof(TU)))
-                    .Select(t => t.Name).ToList(),
+                    .Select(t => t.GetProperty("DisplayName")?.GetValue(null).ToString() ?? t.Name).ToList(),
                 label = ""
+                
             };
+
+        private static ScriptableObject CreateInstanceFromDropdown<T, TU>(string str) where T : EvtNodeData where TU : EvtNodeItemData
+        {
+            var choices = typeof(T).Assembly.GetTypes().Where(t => !t.IsAbstract && t.IsSubclassOf(typeof(TU)))
+                .Select(t => (display: t.GetProperty("DisplayName")?.GetValue(null).ToString() ?? t.Name, value: t.Name)).ToList();
+            var choice = choices.Find(choice => choice.display == str);
+            return ScriptableObject.CreateInstance(choice.value);
+        }
     }
 }
 

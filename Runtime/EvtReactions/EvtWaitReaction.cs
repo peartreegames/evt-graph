@@ -5,6 +5,7 @@ namespace PeartreeGames.EvtGraph
 {
     public class EvtWaitReaction : EvtReaction
     {
+        public new static string DisplayName => "Time/Wait";
         [SerializeField] private float delay;
         private float _remainingDelay;
         public override IEnumerator React(EvtTrigger trigger)

@@ -5,6 +5,7 @@ namespace PeartreeGames.EvtGraph
 {
     public class EvtDistanceCondition : EvtCondition
     {
+        public new static string DisplayName => "Vector3/Distance";
         [SerializeField] private Transform from;
         [SerializeField] private Transform to;
         [SerializeField] private EvtComparisonOperator compOp;

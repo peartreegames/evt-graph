@@ -5,6 +5,7 @@ namespace PeartreeGames.EvtGraph
 {
     public class EvtLightControlReaction : EvtReaction
     {
+        public new static string DisplayName => "Light/Control";
         [SerializeField] private Light light;
         [SerializeField] private Color color;
         [SerializeField] private float intensity;

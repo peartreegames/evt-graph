@@ -6,6 +6,7 @@ namespace PeartreeGames.EvtGraph
 {
     public class EvtNavMoveReaction : EvtReaction
     {
+        public new static string DisplayName => "AI/NavAgentMove";
         [SerializeField] private NavMeshAgent agent;
         [SerializeField] private Transform destination;
         [SerializeField] private float distanceThreshold = 0.1f;
