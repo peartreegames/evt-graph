@@ -3,7 +3,6 @@ Code for the "Creating a Serialized Conditional Reaction Sequence Graph in Unity
 
 Repository has been converted to a package module. The `video-end` branch contains the project at the time of the part 2 completion.
 
----
 ## Installation
 Can be installed via the Package Manager > Add Package From Git URL...
 
@@ -14,13 +13,11 @@ then the repo can be added
 
 `https://github.com/peartreegames/evt-graph.git`
 
----
 ## Architectural Overview
 ![Architecture](./Documentation/Architecture.png)
 
----
 ## Todos
  - [ ] Zoom Persistence
- - [ ] Foldout Persistence
- - [ ] Rest of EvtTriggers
+ - [X] Foldout Persistence
+ - [X] Rest of EvtTriggers
  - [ ] Standard set of Condition/Reactions

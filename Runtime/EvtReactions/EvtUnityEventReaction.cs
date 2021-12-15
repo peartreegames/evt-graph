@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace PeartreeGames.EvtGraph
 {
-    public class EvtDebugReaction : EvtReaction
+    public class EvtUnityEventReaction : EvtReaction
     {
-        [SerializeField] private string message;
+        [SerializeField] private UnityEvent unityEvent;
         public override IEnumerator React(EvtTrigger trigger)
         {
-            Debug.Log(message);
+            unityEvent?.Invoke();
             yield break;
         }
     }

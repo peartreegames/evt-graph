@@ -3,12 +3,13 @@ using UnityEngine;
 
 namespace PeartreeGames.EvtGraph
 {
-    public class EvtDebugReaction : EvtReaction
+    public class EvtSetActiveReaction : EvtReaction
     {
-        [SerializeField] private string message;
+        [SerializeField] private GameObject gameObject;
+        [SerializeField] private bool active;
         public override IEnumerator React(EvtTrigger trigger)
         {
-            Debug.Log(message);
+            gameObject.SetActive(active);
             yield break;
         }
     }

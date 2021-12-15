@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace EvtGraph
+namespace PeartreeGames.EvtGraph
 {
     [Serializable]
     public class EvtEdgeData : ISerializationCallbackReceiver

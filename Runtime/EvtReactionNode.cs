@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 
-namespace EvtGraph
+namespace PeartreeGames.EvtGraph
 {
     public class EvtReactionNode : EvtNodeData<EvtReaction>
     {

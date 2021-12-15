@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace EvtGraph
+namespace PeartreeGames.EvtGraph
 {
     public class EvtDistanceCondition : EvtCondition
     {

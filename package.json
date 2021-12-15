@@ -1,6 +1,6 @@
 {
-    "name": "com.peartree.evtgraph",
-    "version": "1.0.0",
+    "name": "com.peartreegames.evtgraph",
+    "version": "0.1.1",
     "displayName": "EvtGraph",
     "description": "Serialized Conditional Reaction Sequence Graph",
     "unity": "2021.2",
@@ -9,8 +9,8 @@
     "changelogUrl": "https://github.com/peartreegames/evt-graph/changelog.html",
     "licensesUrl": "https://github.com/peartreegames/evt-graph/licensing.html",
     "dependencies": {
-      "com.unity.modules.uielements": "1.0.0",
-      "com.peartree.evtvariables": "1.0.0"
+      "com.unity.modules.uielements": "0.1.0",
+      "com.peartreegames.evtvariables": "0.1.0"
    },
    "keywords": [
       "peartree",

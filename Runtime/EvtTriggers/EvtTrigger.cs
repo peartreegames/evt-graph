@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace EvtGraph
+namespace PeartreeGames.EvtGraph
 {
+    [DisallowMultipleComponent]
     public abstract class EvtTrigger : MonoBehaviour
     {
+        [SerializeField] public float zoomLevel;
+        
         public List<EvtNodeData> nodes;
         public List<EvtEdgeData> edges;
 

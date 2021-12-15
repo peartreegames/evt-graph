@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace EvtGraph
+namespace PeartreeGames.EvtGraph
 {
     public class EvtWaitReaction : EvtReaction
     {

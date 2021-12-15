@@ -1,9 +1,11 @@
 ﻿using System.Collections;
+using UnityEngine;
 
-namespace EvtGraph
+namespace PeartreeGames.EvtGraph
 {
     public abstract class EvtReaction : EvtNodeItemData
     {
+        [HideInInspector] [SerializeField] private bool isExpanded = true;
         public abstract IEnumerator React(EvtTrigger trigger);
     }
 }

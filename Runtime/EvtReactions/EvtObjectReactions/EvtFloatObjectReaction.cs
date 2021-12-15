@@ -5,11 +5,11 @@ using PeartreeGames.EvtVariables;
 
 namespace PeartreeGames.EvtGraph
 {
-    public class EvtIntObjectReaction : EvtReaction
+    public class EvtFloatObjectReaction : EvtReaction
     {
-        [SerializeField] private EvtIntObject variable;
+        [SerializeField] private EvtFloatObject variable;
         [SerializeField] private EvtArithmeticOperator arithOp;
-        [SerializeField] private int value;
+        [SerializeField] private float value;
 
         public override IEnumerator React(EvtTrigger trigger)
         {

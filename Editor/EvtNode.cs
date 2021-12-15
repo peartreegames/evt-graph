@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEditor.Experimental.GraphView;
 
-namespace EvtGraph.Editor
+namespace PeartreeGames.EvtGraph.Editor
 {
     public class EvtNode : Node
     {

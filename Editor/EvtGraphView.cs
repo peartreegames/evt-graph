@@ -7,12 +7,11 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace EvtGraph.Editor
+namespace PeartreeGames.EvtGraph.Editor
 {
     public class EvtGraphView : GraphView
     {
         private readonly EvtTrigger _evtTrigger;
-        private readonly EvtGraphEditor _editorWindow;
 
         private static readonly Vector2 DefaultNodeSize = new(100, 200);
 
@@ -22,8 +21,8 @@ namespace EvtGraph.Editor
         public EvtGraphView(EvtGraphEditor editorWindow, EvtTrigger evtTrigger)
         {
             styleSheets.Add(Resources.Load<StyleSheet>("EvtGraph"));
-            _editorWindow = editorWindow;
             _evtTrigger = evtTrigger;
+
             this.AddManipulator(new ContentDragger());
             this.AddManipulator(new SelectionDragger());
             this.AddManipulator(new RectangleSelector());
@@ -36,7 +35,6 @@ namespace EvtGraph.Editor
             searchWindow.Init(editorWindow, this, evtTrigger);
             nodeCreationRequest = ctx =>
                 SearchWindow.Open(new SearchWindowContext(ctx.screenMousePosition), searchWindow);
-
             LoadGraph();
 
         }
@@ -316,6 +314,8 @@ namespace EvtGraph.Editor
                 node.extensionContainer.Remove(box);
             }) { text = "x" });
             box.Add(foldOut);
+            foldOut.value = serializedProp.FindProperty("isExpanded").boolValue;
+            foldOut.BindProperty(serializedProp.FindProperty("isExpanded"));
             return box;
         }
 

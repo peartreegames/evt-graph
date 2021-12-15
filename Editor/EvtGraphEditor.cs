@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine.UIElements;
 
-namespace EvtGraph.Editor
+namespace PeartreeGames.EvtGraph.Editor
 {
     public class EvtGraphEditor : EditorWindow
     {

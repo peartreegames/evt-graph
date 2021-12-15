@@ -1,8 +1,8 @@
 {
-    "name": "com.peartree.evtgraph",
-    "rootNamespace": "EvtGraph",
+    "name": "PeartreeGames.EvtGraph",
+    "rootNamespace": "PeartreeGames.EvtGraph",
     "references": [
-        "GUID:cce527638df07a9479fd88c889d38dea"
+        "PeartreeGames.EvtVariables"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

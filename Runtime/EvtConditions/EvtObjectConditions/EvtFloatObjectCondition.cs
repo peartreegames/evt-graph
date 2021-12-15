@@ -4,16 +4,16 @@ using PeartreeGames.EvtVariables;
 
 namespace PeartreeGames.EvtGraph
 {
-    public class EvtIntObjectCondition : EvtCondition
+    public class EvtFloatObjectCondition : EvtCondition
     {
-        [SerializeField] private EvtIntObject variable;
+        [SerializeField] private EvtFloatObject variable;
         [SerializeField] private EvtComparisonOperator compOp;
-        [SerializeField] private int target;
+        [SerializeField] private float target;
 
         public override bool CheckIsSatisfied(EvtTrigger trigger) => compOp switch
         {
-            EvtComparisonOperator.Equal => variable.Value == target,
-            EvtComparisonOperator.NotEqual => variable.Value != target,
+            EvtComparisonOperator.Equal => Math.Abs(variable.Value - target) < Mathf.Epsilon,
+            EvtComparisonOperator.NotEqual => Math.Abs(variable.Value - target) > Mathf.Epsilon,
             EvtComparisonOperator.LessThan => variable.Value < target,
             EvtComparisonOperator.GreaterThan => variable.Value > target,
             EvtComparisonOperator.LessThanOrEqual => variable.Value <= target,

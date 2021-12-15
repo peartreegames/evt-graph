@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using PeartreeGames.EvtVariables;
 
-namespace EvtGraph
+namespace PeartreeGames.EvtGraph
 {
     public class EvtBoolObjectCondition : EvtCondition
     {

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace EvtGraph
+namespace PeartreeGames.EvtGraph
 {
     public class EvtNavMoveReaction : EvtReaction
     {

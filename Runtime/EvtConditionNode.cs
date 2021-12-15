@@ -1,4 +1,4 @@
-﻿namespace EvtGraph
+﻿namespace PeartreeGames.EvtGraph
 {
     public class EvtConditionNode : EvtNodeData<EvtCondition>
     {

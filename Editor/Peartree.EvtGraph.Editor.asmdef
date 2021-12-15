@@ -1,8 +1,8 @@
 {
-    "name": "com.peartree.evtgraph.Editor",
-    "rootNamespace": "",
+    "name": "PeartreeGames.EvtGraph.Editor",
+    "rootNamespace": "PeartreeGames.EvtGraph.Editor",
     "references": [
-        "GUID:377db5f5371a9304198fa6a75b8518de"
+        "PeartreeGames.EvtGraph"
     ],
     "includePlatforms": [
         "Editor"

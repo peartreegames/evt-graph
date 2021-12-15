@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace EvtGraph
+namespace PeartreeGames.EvtGraph
 {
     public class EvtLoadSceneReaction : EvtReaction
     {
