@@ -42,21 +42,21 @@ namespace PeartreeGames.EvtGraph.Editor
 
         public void Init()
         {
-            
-            if (isLocked) return;
             var box = new Box {style = {alignItems = Align.Center}};
             box.StretchToParentSize();
             var label = new Label() {style = {top = 50}};
             EvtTrigger evtTrigger = null;
             if (Selection.activeGameObject == null ||
-                !Selection.activeGameObject.TryGetComponent<EvtTrigger>(out evtTrigger)) label.text = "No EvtTrigger selected";
+                !Selection.activeGameObject.TryGetComponent(out evtTrigger)) label.text = "No EvtTrigger selected";
             if (PrefabStageUtility.GetCurrentPrefabStage() != null) label.text = "Cannot edit prefab EvtGraph";
             if (Selection.count > 1) label.text = "Cannot edit multiple EvtTriggers at once";
 
+            if (isLocked && _evtTrigger != null && rootVisualElement.Q<EvtGraphView>() != null) return;
             if (_evtTrigger == evtTrigger) return;
             _evtTrigger = evtTrigger;
             
             rootVisualElement.Clear();
+            isLocked = false;
             if (label.text != string.Empty)
             {
                 box.Add(label);

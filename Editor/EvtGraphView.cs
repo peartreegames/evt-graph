@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
@@ -22,8 +23,6 @@ namespace PeartreeGames.EvtGraph.Editor
         {
             styleSheets.Add(Resources.Load<StyleSheet>("EvtGraph"));
             _evtTrigger = evtTrigger;
-
-
             this.AddManipulator(new ContentDragger());
             this.AddManipulator(new SelectionDragger());
             this.AddManipulator(new RectangleSelector());
@@ -43,8 +42,36 @@ namespace PeartreeGames.EvtGraph.Editor
         private void AddToolbar(EvtGraphEditor editor)
         {
             var tools = new Toolbar();
-            var lockButton = new ToolbarButton();
             tools.AddToClassList("toolbar");
+
+            var templateSaveButton = new ToolbarButton() { text = "Save As" };
+            var templateLoadButton = new ToolbarButton() { text = "Load" };
+            templateSaveButton.clicked += () =>
+            {
+                var path = EditorUtility.SaveFilePanelInProject("Save EvtGraph Template", "evtGraph_", "asset", "");
+                var asset = AssetDatabase.LoadAssetAtPath<EvtGraphTemplate>(path);
+                if (asset == null)
+                {
+                    asset = ScriptableObject.CreateInstance<EvtGraphTemplate>();
+                    asset.name = Path.GetFileName(path);
+                    AssetDatabase.CreateAsset(asset, path);
+                }
+                asset.Save(_evtTrigger);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(asset));
+                AssetDatabase.Refresh();
+            };
+            templateLoadButton.clicked += () =>
+            {
+                var path = EditorUtility.OpenFilePanel("Load EvtGraph Template", "Assets/", "asset");
+                path = Path.GetRelativePath("Assets/", path);
+                var asset = AssetDatabase.LoadAssetAtPath<EvtGraphTemplate>($"Assets/{path}");
+                if (asset == null) return;
+                asset.Load(_evtTrigger);
+                LoadGraph();
+            };
+            
+            var lockButton = new ToolbarButton();
             lockButton.clicked += () =>
             {
                 editor.isLocked = !editor.isLocked;
@@ -52,6 +79,9 @@ namespace PeartreeGames.EvtGraph.Editor
                 if (!editor.isLocked) editor.Init();
             };
             lockButton.text = lockButton.text = editor.isLocked ? "Locked" : "Unlocked";
+            
+            tools.Add(templateSaveButton);
+            tools.Add(templateLoadButton);
             tools.Add(lockButton);
             Add(tools);
         }
@@ -148,6 +178,7 @@ namespace PeartreeGames.EvtGraph.Editor
                         if (targetNode == null) continue;
                         var nodeData = _evtTrigger.nodes.FirstOrDefault(n => n.ID == targetNode.ID);
                         if (nodeData == null) continue;
+                        if (targetNode.inputContainer.childCount == 0) continue;
                         LinkNodes(port, (Port) targetNode.inputContainer[0]);
                     }
                 }

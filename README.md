@@ -16,6 +16,11 @@ then the repo can be added
 ## Architectural Overview
 ![Architecture](./Documentation/Architecture.png)
 
+## Changes
+ 
+  - Templates: Save As and Load EvtGraph structures as template assets
+  - Lock: Lock EvtGraphView on selected EvtTrigger
+  
 ## Todos
  - [ ] Zoom Persistence (Seems to be more complicated than originally thought)
  - [X] Foldout Persistence

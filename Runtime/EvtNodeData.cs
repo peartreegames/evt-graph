@@ -18,6 +18,7 @@ namespace PeartreeGames.EvtGraph
 
     public abstract class EvtNodeData<T> : EvtNodeData where T : EvtNodeItemData
     {
-        [SerializeField] protected List<T> items;
+        [HideInInspector]
+        [SerializeField] public List<T> items;
     }
 }
