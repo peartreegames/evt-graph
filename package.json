@@ -1,6 +1,6 @@
 {
     "name": "com.peartreegames.evtgraph",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "displayName": "EvtGraph",
     "description": "Serialized Conditional Reaction Sequence Graph",
     "unity": "2021.2",
