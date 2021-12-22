@@ -12,7 +12,7 @@ namespace PeartreeGames.EvtGraph
         private List<EvtNodeData> nodes;
 
         [Serializable]
-        private class EvtEdgeIndexes
+        private class EvtTemplateEdge
         {
             public int outputIndex;
             public int inputIndex;
@@ -20,7 +20,7 @@ namespace PeartreeGames.EvtGraph
         }
         
         [SerializeField]
-        private List<EvtEdgeIndexes> edges;
+        private List<EvtTemplateEdge> edges;
 
         public void Save(EvtTrigger evtTrigger)
         {
@@ -44,7 +44,14 @@ namespace PeartreeGames.EvtGraph
                         var condObj = (EvtConditionNode) obj;
                         condObj.items = new List<EvtCondition>();
                         foreach (var item in cond.items)
-                            condObj.items.Add(CreateInstance(item.GetType().Name) as EvtCondition);
+                        {
+                            var cName = item.GetType().Name;
+                            var c = CreateInstance(cName) as EvtCondition;
+                            c.name = cName;
+                            AssetDatabase.AddObjectToAsset(c, this);
+                            condObj.items.Add(c);
+                            
+                        }
                         break;
                     }
                     case EvtReactionNode react:
@@ -52,13 +59,19 @@ namespace PeartreeGames.EvtGraph
                         var reactObj = (EvtReactionNode) obj;
                         reactObj.items = new List<EvtReaction>();
                         foreach (var item in react.items)
-                            reactObj.items.Add(CreateInstance(item.GetType().Name) as EvtReaction);
+                        {
+                            var rName = item.GetType().Name;
+                            var r = CreateInstance(item.GetType().Name) as EvtReaction;
+                            r.name = rName;
+                            AssetDatabase.AddObjectToAsset(r, this);
+                            reactObj.items.Add(r);
+                        }
                         break;
                     }
                 }
                 nodes.Add(obj);
             }
-            edges = evtTrigger.edges.Select(edge => new EvtEdgeIndexes()
+            edges = evtTrigger.edges.Select(edge => new EvtTemplateEdge()
             {
                 outputIndex = evtTrigger.nodes.FindIndex(n => n.ID == edge.OutputId),
                 inputIndex = evtTrigger.nodes.FindIndex(n => n.ID == edge.InputId),
@@ -80,15 +93,17 @@ namespace PeartreeGames.EvtGraph
                     {
                         var condObj = (EvtConditionNode) obj;
                         condObj.items = new List<EvtCondition>();
-                        foreach (var item in cond.items)
+                        foreach (var item in cond.items.Where(item => item != null))
+                        {
                             condObj.items.Add(CreateInstance(item.GetType().Name) as EvtCondition);
+                        }
                         break;
                     }
                     case EvtReactionNode react:
                     {
                         var reactObj = (EvtReactionNode) obj;
                         reactObj.items = new List<EvtReaction>();
-                        foreach (var item in react.items)
+                        foreach (var item in react.items.Where(item => item != null))
                             reactObj.items.Add(CreateInstance(item.GetType().Name) as EvtReaction);
                         break;
                     }

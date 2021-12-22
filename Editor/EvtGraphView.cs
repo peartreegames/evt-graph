@@ -49,6 +49,7 @@ namespace PeartreeGames.EvtGraph.Editor
             templateSaveButton.clicked += () =>
             {
                 var path = EditorUtility.SaveFilePanelInProject("Save EvtGraph Template", "evtGraph_", "asset", "");
+                if (path == string.Empty) return;
                 var asset = AssetDatabase.LoadAssetAtPath<EvtGraphTemplate>(path);
                 if (asset == null)
                 {
@@ -64,6 +65,7 @@ namespace PeartreeGames.EvtGraph.Editor
             templateLoadButton.clicked += () =>
             {
                 var path = EditorUtility.OpenFilePanel("Load EvtGraph Template", "Assets/", "asset");
+                if (path == string.Empty) return;
                 path = Path.GetRelativePath("Assets/", path);
                 var asset = AssetDatabase.LoadAssetAtPath<EvtGraphTemplate>($"Assets/{path}");
                 if (asset == null) return;
