@@ -3,6 +3,8 @@ Code for "Creating a Serialized Conditional Reaction Sequence Graph in Unity" [Y
 
 Repository has been converted to a package module. The `video-end` branch contains the project at the time of the part 2 completion.
 
+A few UIElements used were introduced in Unity 2021, for previous version of Unity the code will need to be modified to work. A PR with version compile directives would be welcome, but I don't think I'll ever get around to it.
+
 ## Installation
 Can be installed via the Package Manager > Add Package From Git URL...
 
@@ -26,4 +28,4 @@ then the repo can be added
  - [X] Foldout Persistence
  - [X] Rest of EvtTriggers
  - [ ] Standard set of Condition/Reactions
-
+ - [ ] Allow template graph editing directly in GraphView

@@ -33,7 +33,9 @@ namespace PeartreeGames.EvtGraph
             
             foreach (var node in evtTrigger.nodes)
             {
-                var obj = CreateInstance(node.GetType().Name) as EvtNodeData;
+                var nodeName = node.GetType().Name;
+                var obj = CreateInstance(nodeName) as EvtNodeData;
+                obj.name = nodeName;
                 obj.position = node.position;
                 obj.ID = Guid.Empty;
                 AssetDatabase.AddObjectToAsset(obj, this);
