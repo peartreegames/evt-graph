@@ -9,8 +9,7 @@ namespace PeartreeGames.EvtGraph
 #if UNITY_EDITOR
         public event Action<bool> OnActive;
 #endif
-
-
+        
         public const string OnCompletePortName = "OnComplete";
 
         public override void Execute(EvtTrigger trigger)
@@ -33,5 +32,6 @@ namespace PeartreeGames.EvtGraph
             OnActive?.Invoke(isActive);
 #endif
         }
+        
     }
 }

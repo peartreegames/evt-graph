@@ -72,25 +72,16 @@ namespace PeartreeGames.EvtGraph.Editor
                 asset.Load(_evtTrigger);
                 LoadGraph();
             };
-            
-            var lockButton = new ToolbarButton();
-            lockButton.clicked += () =>
-            {
-                editor.isLocked = !editor.isLocked;
-                lockButton.text = editor.isLocked ? "Locked" : "Unlocked";
-                if (!editor.isLocked) editor.Init();
-            };
-            lockButton.text = lockButton.text = editor.isLocked ? "Locked" : "Unlocked";
-            
+
             tools.Add(templateSaveButton);
             tools.Add(templateLoadButton);
-            tools.Add(lockButton);
             Add(tools);
         }
 
 
         private GraphViewChange OnGraphChanged(GraphViewChange graphViewChange)
         {
+            if (_evtTrigger == null) return graphViewChange;
             if (graphViewChange.edgesToCreate != null)
             {
                 foreach (var edge in graphViewChange.edgesToCreate)

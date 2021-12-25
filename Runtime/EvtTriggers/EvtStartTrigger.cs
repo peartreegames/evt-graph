@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PeartreeGames.EvtGraph
+﻿namespace PeartreeGames.EvtGraph
 {
     public class EvtStartTrigger : EvtTrigger
     {

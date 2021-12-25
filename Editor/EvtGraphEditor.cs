@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEditor;
 using UnityEditor.SceneManagement;
-using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
 namespace PeartreeGames.EvtGraph.Editor
@@ -37,10 +36,7 @@ namespace PeartreeGames.EvtGraph.Editor
             Init();
         }
 
-        private EvtTrigger _evtTrigger;
-        public bool isLocked;
-
-        public void Init()
+        private void Init()
         {
             var box = new Box {style = {alignItems = Align.Center}};
             box.StretchToParentSize();
@@ -50,14 +46,9 @@ namespace PeartreeGames.EvtGraph.Editor
                 !Selection.activeGameObject.TryGetComponent(out evtTrigger)) label.text = "No EvtTrigger selected";
             if (PrefabStageUtility.GetCurrentPrefabStage() != null) label.text = "Cannot edit prefab EvtGraph";
             if (Selection.count > 1) label.text = "Cannot edit multiple EvtTriggers at once";
-
-            if (isLocked && _evtTrigger != null && rootVisualElement.Q<EvtGraphView>() != null) return;
-            if (_evtTrigger == evtTrigger) return;
-            _evtTrigger = evtTrigger;
             
             rootVisualElement.Clear();
-            isLocked = false;
-            if (label.text != string.Empty)
+            if (label.text != string.Empty || evtTrigger == null)
             {
                 box.Add(label);
                 rootVisualElement.Add(box);

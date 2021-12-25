@@ -21,7 +21,6 @@ then the repo can be added
 ## Changes
  
   - Templates: Save As and Load EvtGraph structures as template assets
-  - Lock: Lock EvtGraphView on selected EvtTrigger
   
 ## Todos
  - [ ] Zoom Persistence (Seems to be more complicated than originally thought)
@@ -29,3 +28,4 @@ then the repo can be added
  - [X] Rest of EvtTriggers
  - [ ] Standard set of Condition/Reactions
  - [ ] Allow template graph editing directly in GraphView
+ - [ ] Lock GraphView to selected EvtTrigger (Entering play mode causes issues, need to revisit)

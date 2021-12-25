@@ -20,5 +20,11 @@ namespace PeartreeGames.EvtGraph
     {
         [HideInInspector]
         [SerializeField] public List<T> items;
+
+        private void OnValidate()
+        {
+            items.RemoveAll(item => item == null);
+            items.TrimExcess();
+        }
     }
 }

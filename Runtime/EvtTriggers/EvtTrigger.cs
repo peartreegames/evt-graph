@@ -5,18 +5,21 @@ using UnityEngine;
 namespace PeartreeGames.EvtGraph
 {
     [DisallowMultipleComponent]
+    [ExecuteInEditMode]
     public abstract class EvtTrigger : MonoBehaviour
     {
+        [HideInInspector]
         [SerializeField] public float zoomLevel;
-        
+
         public List<EvtNodeData> nodes;
         public List<EvtEdgeData> edges;
 
         private bool IsRunning => nodes.FindAll(n => n is EvtReactionNode reaction && reaction.isActive).Count > 0;
+
         protected void Trigger()
         {
             if (IsRunning) return;
-            foreach(var node in GetRootNodes()) node.Execute(this);
+            foreach (var node in GetRootNodes()) node.Execute(this);
         }
 
         private List<EvtNodeData> GetRootNodes()
