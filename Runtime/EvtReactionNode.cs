@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections;
+using UnityEngine;
 
 namespace PeartreeGames.EvtGraph
 {
     public class EvtReactionNode : EvtNodeData<EvtReaction>
     {
-        public bool isActive;
+        public bool IsActive { get; private set; }
 #if UNITY_EDITOR
         public event Action<bool> OnActive;
 #endif
@@ -19,17 +20,17 @@ namespace PeartreeGames.EvtGraph
 
         private IEnumerator React(EvtTrigger trigger)
         {
-            isActive = true;
+            IsActive = true;
 #if UNITY_EDITOR
-            OnActive?.Invoke(isActive);
+            OnActive?.Invoke(IsActive);
 #endif
             var coroutines = items.ConvertAll(reaction => trigger.StartCoroutine(reaction.React(trigger)));
             foreach (var coroutine in coroutines) yield return coroutine;
             var connections = trigger.GetConnectedNodes(this, OnCompletePortName);
             foreach (var connection in connections) connection.Execute(trigger);
-            isActive = false;
+            IsActive = false;
 #if UNITY_EDITOR
-            OnActive?.Invoke(isActive);
+            OnActive?.Invoke(IsActive);
 #endif
         }
         

@@ -277,7 +277,7 @@ namespace PeartreeGames.EvtGraph.Editor
             
             CreatePropertyBoxes(node, serialized, reactions);
 
-            node.extensionContainer.style.borderBottomWidth = reaction.isActive ? 5 : 0;
+            node.extensionContainer.style.borderBottomWidth = reaction.IsActive ? 5 : 0;
             reaction.OnActive += enabled => node.extensionContainer.style.borderBottomWidth = enabled ? 5 : 0;
         }
         
@@ -355,7 +355,7 @@ namespace PeartreeGames.EvtGraph.Editor
                 serializedProperty.DeleteArrayElementAtIndex(i);
                 serializedObject.ApplyModifiedProperties();
                 node.extensionContainer.Remove(box);
-            }) { text = "x" });
+            }) { text = "x", style = { alignSelf = Align.FlexEnd } });
             box.Add(foldOut);
             foldOut.value = serializedProp.FindProperty("isExpanded").boolValue;
             foldOut.BindProperty(serializedProp.FindProperty("isExpanded"));

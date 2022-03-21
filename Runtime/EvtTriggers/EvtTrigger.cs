@@ -5,7 +5,6 @@ using UnityEngine;
 namespace PeartreeGames.EvtGraph
 {
     [DisallowMultipleComponent]
-    [ExecuteInEditMode]
     public abstract class EvtTrigger : MonoBehaviour
     {
         [HideInInspector]
@@ -14,7 +13,7 @@ namespace PeartreeGames.EvtGraph
         public List<EvtNodeData> nodes;
         public List<EvtEdgeData> edges;
 
-        private bool IsRunning => nodes.FindAll(n => n is EvtReactionNode reaction && reaction.isActive).Count > 0;
+        private bool IsRunning => nodes?.FindAll(n => n is EvtReactionNode reaction && reaction.IsActive).Count > 0;
 
         protected void Trigger()
         {
