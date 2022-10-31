@@ -10,8 +10,8 @@ namespace PeartreeGames.EvtGraph
         [HideInInspector]
         [SerializeField] public float zoomLevel;
 
-        public List<EvtNodeData> nodes;
-        public List<EvtEdgeData> edges;
+        public List<EvtNodeData> nodes = new();
+        public List<EvtEdgeData> edges = new();
 
         private bool IsRunning => nodes?.FindAll(n => n is EvtReactionNode reaction && reaction.IsActive).Count > 0;
 

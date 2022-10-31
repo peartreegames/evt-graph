@@ -30,7 +30,7 @@ namespace PeartreeGames.EvtGraph.Editor
             graphViewChanged = OnGraphChanged;
             var grid = new GridBackground();
             Insert(0, grid);
-            AddToolbar(editorWindow);
+            AddToolbar();
             var searchWindow = ScriptableObject.CreateInstance<EvtNodeSearchWindow>();
             searchWindow.Init(editorWindow, this, evtTrigger);
             nodeCreationRequest = ctx =>
@@ -39,7 +39,7 @@ namespace PeartreeGames.EvtGraph.Editor
 
         }
 
-        private void AddToolbar(EvtGraphEditor editor)
+        private void AddToolbar()
         {
             var tools = new Toolbar();
             tools.AddToClassList("toolbar");
@@ -148,13 +148,13 @@ namespace PeartreeGames.EvtGraph.Editor
 
         private void RecreateGraph()
         {
-            if (_evtTrigger == null || _evtTrigger.nodes == null) return;
+            if (_evtTrigger == null || _evtTrigger.nodes == null || _evtTrigger.edges == null) return;
             foreach (var nodeData in _evtTrigger.nodes)
             {
                 var node = CreateNode(nodeData);
                 if (node == null) continue;
                 AddElement(node);
-                node.SetPosition(new Rect(nodeData.position, EvtGraphView.DefaultNodeSize));
+                node.SetPosition(new Rect(nodeData.position, DefaultNodeSize));
             }
 
             var cachedNodes = Nodes;
@@ -250,7 +250,7 @@ namespace PeartreeGames.EvtGraph.Editor
 
         private void CreateReactionNode(EvtNode node, EvtReactionNode reaction)
         {
-            var choices = CreateDropDown<EvtReactionNode, EvtReaction>();
+            var choices = CreateDropDown<EvtReaction>();
             choices.choices.Insert(0, "Select Reaction");
             choices.index = 0;
             node.title = "Reaction";
@@ -263,7 +263,7 @@ namespace PeartreeGames.EvtGraph.Editor
             var reactions = serialized.FindProperty("items");
             choices.RegisterValueChangedCallback(change =>
             {
-                if (CreateInstanceFromDropdown<EvtReactionNode, EvtReaction>(change.newValue) is not EvtReaction react) return;
+                if (CreateInstanceFromDropdown<EvtReaction>(change.newValue) is not EvtReaction react) return;
                 react.name = change.newValue;
                 choices.SetValueWithoutNotify("Select Reaction");
                 reactions.arraySize++;
@@ -284,7 +284,7 @@ namespace PeartreeGames.EvtGraph.Editor
 
         private void CreateConditionNode(EvtNode node, EvtConditionNode condition)
         {
-            var choices = CreateDropDown<EvtConditionNode, EvtCondition>();
+            var choices = CreateDropDown<EvtCondition>();
             choices.choices.Insert(0, "Select Condition");
             choices.index = 0;
             node.title = "Condition";
@@ -301,7 +301,7 @@ namespace PeartreeGames.EvtGraph.Editor
             var conditions = serialized.FindProperty("items");
             choices.RegisterValueChangedCallback(change =>
             {
-                if (CreateInstanceFromDropdown<EvtConditionNode, EvtCondition>(change.newValue) is not EvtCondition cond) return;
+                if (CreateInstanceFromDropdown<EvtCondition>(change.newValue) is not EvtCondition cond) return;
                 cond.name = change.newValue;
                 choices.SetValueWithoutNotify("Select Condition");
                 conditions.arraySize++;
@@ -316,10 +316,10 @@ namespace PeartreeGames.EvtGraph.Editor
             CreatePropertyBoxes(node, serialized, conditions);
         }
 
-        private void CreatePropertyBoxes(EvtNode node, SerializedObject serializedObject, SerializedProperty serializedProperty)
+        private static void CreatePropertyBoxes(EvtNode node, SerializedObject serializedObject, SerializedProperty serializedProperty)
         {
             if (serializedProperty == null) return;
-            for (int i = 0; i < serializedProperty.arraySize; i++)
+            for (var i = 0; i < serializedProperty.arraySize; i++)
             {
                 var box = CreatePropertyBox(node, serializedObject, serializedProperty, i);
                 if (box == null) continue;
@@ -333,7 +333,7 @@ namespace PeartreeGames.EvtGraph.Editor
             if (obj is null) return null;
             var box = new GroupBox();
             box.AddToClassList("property-box");
-            var foldOut = new Foldout()
+            var foldOut = new Foldout
             {
                 text = obj.GetType().GetProperty("DisplayName")?.GetValue(null).ToString() ?? obj.GetType().Name
             };
@@ -362,18 +362,17 @@ namespace PeartreeGames.EvtGraph.Editor
             return box;
         }
 
-        private static DropdownField CreateDropDown<T, TU>() where T : EvtNodeData where TU : EvtNodeItemData =>
+        private static DropdownField CreateDropDown<TU>() where TU : EvtNodeItemData =>
             new()
             {
-                choices = typeof(T).Assembly.GetTypes().Where(t => !t.IsAbstract && t.IsSubclassOf(typeof(TU)))
+                choices = AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).Where(t => !t.IsAbstract && t.IsSubclassOf(typeof(TU)))
                     .Select(t => t.GetProperty("DisplayName")?.GetValue(null).ToString() ?? t.Name).ToList(),
                 label = ""
-                
             };
 
-        private static ScriptableObject CreateInstanceFromDropdown<T, TU>(string str) where T : EvtNodeData where TU : EvtNodeItemData
+        private static ScriptableObject CreateInstanceFromDropdown<TU>(string str) where TU : EvtNodeItemData
         {
-            var choices = typeof(T).Assembly.GetTypes().Where(t => !t.IsAbstract && t.IsSubclassOf(typeof(TU)))
+            var choices = AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).Where(t => !t.IsAbstract && t.IsSubclassOf(typeof(TU)))
                 .Select(t => (display: t.GetProperty("DisplayName")?.GetValue(null).ToString() ?? t.Name, value: t.Name)).ToList();
             var choice = choices.Find(choice => choice.display == str);
             return ScriptableObject.CreateInstance(choice.value);

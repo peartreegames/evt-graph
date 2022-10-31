@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine.UIElements;
 
@@ -7,7 +6,7 @@ namespace PeartreeGames.EvtGraph.Editor
 {
     public class EvtGraphEditor : EditorWindow
     {
-        [MenuItem("Evt/Graph")]
+        [MenuItem("Tools/Evt/Graph")]
         private static void ShowWindow()
         {
             var window = GetWindow<EvtGraphEditor>();
@@ -20,7 +19,6 @@ namespace PeartreeGames.EvtGraph.Editor
             Init();
             Selection.selectionChanged += Init;
             EditorApplication.playModeStateChanged += PlayModeChanged;
-            EditorApplication.hierarchyChanged += Init;
         }
 
         private void OnDisable()
@@ -28,7 +26,6 @@ namespace PeartreeGames.EvtGraph.Editor
             rootVisualElement.Clear();
             Selection.selectionChanged -= Init;
             EditorApplication.playModeStateChanged -= PlayModeChanged;
-            EditorApplication.hierarchyChanged -= Init;
         }
 
         private void PlayModeChanged(PlayModeStateChange mode)
@@ -40,7 +37,7 @@ namespace PeartreeGames.EvtGraph.Editor
         {
             var box = new Box {style = {alignItems = Align.Center}};
             box.StretchToParentSize();
-            var label = new Label() {style = {top = 50}};
+            var label = new Label {style = {top = 50}};
             EvtTrigger evtTrigger = null;
             if (Selection.activeGameObject == null ||
                 !Selection.activeGameObject.TryGetComponent(out evtTrigger)) label.text = "No EvtTrigger selected";
