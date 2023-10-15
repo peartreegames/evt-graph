@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace PeartreeGames.EvtGraph.Editor
+namespace PeartreeGames.Evt.Graph.Editor
 {
     [CustomPropertyDrawer(typeof(TagAttribute))]
     public class TagDrawer : PropertyDrawer

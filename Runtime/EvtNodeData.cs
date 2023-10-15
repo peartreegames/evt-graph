@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PeartreeGames.EvtGraph
+namespace PeartreeGames.Evt.Graph
 {
     public abstract class EvtNodeData : ScriptableObject, ISerializationCallbackReceiver
     {

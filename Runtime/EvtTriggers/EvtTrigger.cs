@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PeartreeGames.EvtGraph
+namespace PeartreeGames.Evt.Graph
 {
     [DisallowMultipleComponent]
     public abstract class EvtTrigger : MonoBehaviour

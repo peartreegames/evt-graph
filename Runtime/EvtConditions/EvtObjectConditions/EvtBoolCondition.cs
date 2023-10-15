@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
-using PeartreeGames.EvtVariables;
+using PeartreeGames.Evt.Variables;
 
-namespace PeartreeGames.EvtGraph
+namespace PeartreeGames.Evt.Graph
 {
-    public class EvtBoolObjectCondition : EvtCondition
+    public class EvtBoolCondition : EvtCondition
     {
         public new static string DisplayName => "Variable/Bool";
-        [SerializeField] private EvtBoolObject variable;
+        [SerializeField] private EvtBool variable;
         [SerializeField] private bool target;
         public override bool CheckIsSatisfied(EvtTrigger trigger) => variable.Value == target;
     }

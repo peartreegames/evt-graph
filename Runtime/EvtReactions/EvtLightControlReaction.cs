@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace PeartreeGames.EvtGraph
+namespace PeartreeGames.Evt.Graph
 {
     public class EvtLightControlReaction : EvtReaction
     {

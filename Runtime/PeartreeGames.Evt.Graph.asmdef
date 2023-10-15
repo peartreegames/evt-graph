@@ -1,12 +1,10 @@
 {
-    "name": "PeartreeGames.EvtGraph.Editor",
-    "rootNamespace": "PeartreeGames.EvtGraph.Editor",
+    "name": "PeartreeGames.Evt.Graph",
+    "rootNamespace": "PeartreeGames.Evt.Graph",
     "references": [
-        "PeartreeGames.EvtGraph"
+        "PeartreeGames.Evt.Variables"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

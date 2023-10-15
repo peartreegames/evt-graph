@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace PeartreeGames.EvtGraph
+namespace PeartreeGames.Evt.Graph
 {
     public class EvtGraphTemplate : ScriptableObject
     {

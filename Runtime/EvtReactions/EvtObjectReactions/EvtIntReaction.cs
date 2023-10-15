@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
-using PeartreeGames.EvtVariables;
+using PeartreeGames.Evt.Variables;
 
-namespace PeartreeGames.EvtGraph
+namespace PeartreeGames.Evt.Graph
 {
-    public class EvtIntObjectReaction : EvtReaction
+    public class EvtIntReaction : EvtReaction
     {
         public new static string DisplayName => "Variable/Int";
-        [SerializeField] private EvtIntObject variable;
+        [SerializeField] private EvtInt variable;
         [SerializeField] private EvtArithmeticOperator arithOp;
         [SerializeField] private int value;
 

@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using UnityEngine;
-using PeartreeGames.EvtVariables;
+using PeartreeGames.Evt.Variables;
 
-namespace PeartreeGames.EvtGraph
+namespace PeartreeGames.Evt.Graph
 {
-    public class EvtBoolObjectReaction : EvtReaction
+    public class EvtBoolReaction : EvtReaction
     {
         public new static string DisplayName => "Variable/Bool";
-        [SerializeField] private EvtBoolObject variable;
+        [SerializeField] private EvtBool variable;
         [SerializeField] private bool value;
         public override IEnumerator React(EvtTrigger trigger)
         {

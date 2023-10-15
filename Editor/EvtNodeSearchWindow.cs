@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace PeartreeGames.EvtGraph.Editor
+namespace PeartreeGames.Evt.Graph.Editor
 {
     public class EvtNodeSearchWindow : ScriptableObject, ISearchWindowProvider
     {
         private EvtGraphView _view;
-        private EvtGraphEditor _editor;
+        private EditorWindow _editor;
         private EvtTrigger _evtTrigger;
 
-        public void Init(EvtGraphEditor editor, EvtGraphView view, EvtTrigger trigger)
+        public void Init(EditorWindow editor, EvtGraphView view, EvtTrigger trigger)
         {
             _editor = editor;
             _view = view;

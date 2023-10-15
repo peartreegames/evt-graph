@@ -8,7 +8,7 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace PeartreeGames.EvtGraph.Editor
+namespace PeartreeGames.Evt.Graph.Editor
 {
     public class EvtGraphView : GraphView
     {
@@ -19,7 +19,7 @@ namespace PeartreeGames.EvtGraph.Editor
         private Edge[] Edges => edges.ToArray();
         private EvtNode[] Nodes => nodes.Cast<EvtNode>().ToArray();
 
-        public EvtGraphView(EvtGraphEditor editorWindow, EvtTrigger evtTrigger)
+        public EvtGraphView(EditorWindow editorWindow, EvtTrigger evtTrigger)
         {
             styleSheets.Add(Resources.Load<StyleSheet>("EvtGraph"));
             _evtTrigger = evtTrigger;
@@ -48,7 +48,7 @@ namespace PeartreeGames.EvtGraph.Editor
             var templateLoadButton = new ToolbarButton() { text = "Load" };
             templateSaveButton.clicked += () =>
             {
-                var path = EditorUtility.SaveFilePanelInProject("Save EvtGraph Template", "evtGraph_", "asset", "");
+                var path = EditorUtility.SaveFilePanelInProject("Save Evt.Graph Template", "Evt.Graph_", "asset", "");
                 if (path == string.Empty) return;
                 var asset = AssetDatabase.LoadAssetAtPath<EvtGraphTemplate>(path);
                 if (asset == null)
@@ -64,7 +64,7 @@ namespace PeartreeGames.EvtGraph.Editor
             };
             templateLoadButton.clicked += () =>
             {
-                var path = EditorUtility.OpenFilePanel("Load EvtGraph Template", "Assets/", "asset");
+                var path = EditorUtility.OpenFilePanel("Load Evt.Graph Template", "Assets/", "asset");
                 if (path == string.Empty) return;
                 path = Path.GetRelativePath("Assets/", path);
                 var asset = AssetDatabase.LoadAssetAtPath<EvtGraphTemplate>($"Assets/{path}");

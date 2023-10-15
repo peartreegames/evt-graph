@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PeartreeGames.EvtGraph
+namespace PeartreeGames.Evt.Graph
 {
     public abstract class EvtNodeItemData : ScriptableObject
     {

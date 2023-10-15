@@ -1,4 +1,4 @@
-﻿namespace PeartreeGames.EvtGraph
+﻿namespace PeartreeGames.Evt.Graph
 {
     public enum EvtComparisonOperator
     {

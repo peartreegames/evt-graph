@@ -1,4 +1,4 @@
-## EvtGraph
+## Evt.Graph
 Code for "Creating a Serialized Conditional Reaction Sequence Graph in Unity" [YouTube videos](https://www.youtube.com/watch?v=KJ_ba50nooQ)
 
 Repository has been converted to a package module. The `video-end` branch contains the project at the time of the part 2 completion.
@@ -20,7 +20,7 @@ then the repo can be added
 
 ## Changes
  
-  - Templates: Save As and Load EvtGraph structures as template assets
+  - Templates: Save As and Load Evt.Graph structures as template assets
   
 ## Todos
  - [ ] Zoom Persistence (Seems to be more complicated than originally thought)

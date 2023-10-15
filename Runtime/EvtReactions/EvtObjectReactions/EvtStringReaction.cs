@@ -1,13 +1,13 @@
 ﻿using System.Collections;
-using PeartreeGames.EvtVariables;
+using PeartreeGames.Evt.Variables;
 using UnityEngine;
 
-namespace PeartreeGames.EvtGraph
+namespace PeartreeGames.Evt.Graph
 {
-    public class EvtStringObjectReaction : EvtReaction
+    public class EvtStringReaction : EvtReaction
     {
         public new static string DisplayName => "Variable/String";
-        [SerializeField] private EvtStringObject variable;
+        [SerializeField] private EvtString variable;
         [SerializeField] private string value;
         public override IEnumerator React(EvtTrigger trigger)
         {

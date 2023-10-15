@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace PeartreeGames.EvtGraph
+namespace PeartreeGames.Evt.Graph
 {
     [AttributeUsage(AttributeTargets.Field)]
     public class TagAttribute : PropertyAttribute

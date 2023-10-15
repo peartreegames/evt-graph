@@ -1,20 +1,20 @@
 ﻿using System;
 using UnityEngine;
-using PeartreeGames.EvtVariables;
+using PeartreeGames.Evt.Variables;
 
-namespace PeartreeGames.EvtGraph
+namespace PeartreeGames.Evt.Graph
 {
-    public class EvtFloatObjectCondition : EvtCondition
+    public class EvtIntCondition : EvtCondition
     {
-        public new static string DisplayName => "Variable/Float";
-        [SerializeField] private EvtFloatObject variable;
+        public new static string DisplayName => "Variable/Int";
+        [SerializeField] private EvtInt variable;
         [SerializeField] private EvtComparisonOperator compOp;
-        [SerializeField] private float target;
+        [SerializeField] private int target;
 
         public override bool CheckIsSatisfied(EvtTrigger trigger) => compOp switch
         {
-            EvtComparisonOperator.Equal => Math.Abs(variable.Value - target) < Mathf.Epsilon,
-            EvtComparisonOperator.NotEqual => Math.Abs(variable.Value - target) > Mathf.Epsilon,
+            EvtComparisonOperator.Equal => variable.Value == target,
+            EvtComparisonOperator.NotEqual => variable.Value != target,
             EvtComparisonOperator.LessThan => variable.Value < target,
             EvtComparisonOperator.GreaterThan => variable.Value > target,
             EvtComparisonOperator.LessThanOrEqual => variable.Value <= target,

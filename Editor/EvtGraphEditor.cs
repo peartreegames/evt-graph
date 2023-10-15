@@ -2,7 +2,7 @@
 using UnityEditor.SceneManagement;
 using UnityEngine.UIElements;
 
-namespace PeartreeGames.EvtGraph.Editor
+namespace PeartreeGames.Evt.Graph.Editor
 {
     public class EvtGraphEditor : EditorWindow
     {
@@ -10,7 +10,7 @@ namespace PeartreeGames.EvtGraph.Editor
         private static void ShowWindow()
         {
             var window = GetWindow<EvtGraphEditor>();
-            window.titleContent = new UnityEngine.GUIContent("EvtGraph");
+            window.titleContent = new UnityEngine.GUIContent("Evt.Graph");
             window.Show();
         }
 
@@ -41,7 +41,7 @@ namespace PeartreeGames.EvtGraph.Editor
             EvtTrigger evtTrigger = null;
             if (Selection.activeGameObject == null ||
                 !Selection.activeGameObject.TryGetComponent(out evtTrigger)) label.text = "No EvtTrigger selected";
-            if (PrefabStageUtility.GetCurrentPrefabStage() != null) label.text = "Cannot edit prefab EvtGraph";
+            if (PrefabStageUtility.GetCurrentPrefabStage() != null) label.text = "Cannot edit prefab Evt.Graph";
             if (Selection.count > 1) label.text = "Cannot edit multiple EvtTriggers at once";
             
             rootVisualElement.Clear();
@@ -53,7 +53,7 @@ namespace PeartreeGames.EvtGraph.Editor
             }
             var graph = new EvtGraphView(this, evtTrigger)
             {
-                name = "EvtGraph"
+                name = "Evt.Graph"
             };
             graph.StretchToParentSize();
             rootVisualElement.Add(graph);
